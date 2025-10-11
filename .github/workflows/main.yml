@@ -1,16 +1,16 @@
-name: Build Zygisk ImGui ModMenu
+name: Build Zygisk ImGui Menu
 
 on:
   workflow_dispatch:
   push:
     branches:
-      - master
       - main
+      - master
 
 jobs:
   build:
-    name: Build module
     runs-on: ubuntu-latest
+    name: Build Zygisk ImGui Menu
 
     steps:
       - name: Checkout repository
@@ -30,15 +30,18 @@ jobs:
           build-tools: '34.0.0'
           ndk: '26.1.10909125'
 
+      - name: Create local.properties
+        run: echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
+
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
-      - name: Build release
-        run: ./gradlew :module:assembleRelease
+      - name: Build release APK
+        run: ./gradlew :app:assembleRelease
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: zygisk-imgui-modmenu
-          path: out/magisk_module_release/
+          name: zygisk-imgui-menu
+          path: app/build/outputs/**/*.apk
           if-no-files-found: warn
