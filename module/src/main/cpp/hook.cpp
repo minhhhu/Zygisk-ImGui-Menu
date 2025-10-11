@@ -31,7 +31,7 @@
 #include "Rect.h"
 #include <fstream>
 #include <limits>
-#define GamePackageName "com.superclay.freecashknight" // define the game package name here please
+#define GamePackageName "com.ironhorsegames.idlemonstertd" // define the game package name here please
 
 int glHeight, glWidth;
 
